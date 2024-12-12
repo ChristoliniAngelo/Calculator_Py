@@ -1,3 +1,4 @@
+import time
 import tkinter as tk
 from tkinter import messagebox
 
@@ -67,9 +68,11 @@ for j in range(4):
 
 # Execute program
 print("Hello There ^v^")
-import time
-
 time.sleep(1)
 print("Calculator is launching....")
 time.sleep(1)
 root.mainloop()
+time.sleep(1)
+print("Calculator is closing....")
+messagebox.showinfo("Goodbye", "Thank you for using the calculator")
+print("Goodbye ^O^")
