@@ -30,6 +30,7 @@ def on_numpad_click(char):
             result = eval(expression)
             entry_display.delete(0, tk.END)
             entry_display.insert(0, str(result))
+            print(f"{expression} = {result}")
         except Exception as e:
             messagebox.showerror("Error", "Invalid Expression")
     else:
@@ -41,11 +42,12 @@ def on_numpad_click(char):
 # GUI
 root = tk.Tk()
 root.title("Calculator")
-root.geometry("300x400")
+root.geometry("350x500")
+root.configure(bg="#2e3f4f")
 
-# Configure grid
-entry_display = tk.Entry(root, font=("Arial", 18), justify="right")
-entry_display.grid(row=0, column=0, columnspan=4, padx=10, pady=10)
+# Entry Display
+entry_display = tk.Entry(root, font=("Arial", 20), justify="right", bg="#dbe2ef", fg="#0f4c75")
+entry_display.grid(row=0, column=0, columnspan=4, padx=10, pady=10, ipady=10)
 
 # Buttons mapping
 buttons = [
@@ -53,11 +55,25 @@ buttons = [
     ("4", 2, 0), ("5", 2, 1), ("6", 2, 2), ("*", 2, 3),
     ("1", 3, 0), ("2", 3, 1), ("3", 3, 2), ("-", 3, 3),
     ("0", 4, 0), (".", 4, 1), ("=", 4, 2), ("+", 4, 3),
-    ("(", 5, 0), (")", 5, 1), ("C", 5, 2), ("Del", 5, 3)
+    ("(", 5, 0), (")", 5, 1), ("Del", 5, 2), ("C", 5, 3)
 ]
 
+#UI colors and fonts
+button_bg = "#3d5a80"
+button_fg = "#ffffff"
+button_active_bg = "#98c1d9"
+button_font = ("Arial", 16)
+
 for (text, row, col) in buttons:
-    button = tk.Button(root, text=text, font=("Arial", 14), command=lambda char=text: on_numpad_click(char))
+    button = tk.Button(
+        root,
+        text=text,
+        font=button_font,
+        bg=button_bg,
+        fg=button_fg,
+        activebackground=button_active_bg,
+        command=lambda char=text: on_numpad_click(char)
+    )
     button.grid(row=row, column=col, padx=5, pady=5, sticky="nsew")
 
 # Adjust row and column weights
